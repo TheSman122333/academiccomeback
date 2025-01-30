@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Comeback💪</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #A6DCA7;
+            text-align: center;
+        }
+        header {
+            background: #E5B379;
+            color: white;
+            padding: 20px;
+        }
+        .resources {
+            display: flex;
+            justify-content: center;
+            gap: 150px;
+            margin: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .card {
+            width: 250px;
+            height: 300px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+            background: #40d186;
+            color: white;
+        }
+        .card-back ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        .card-back ul li {
+            margin: 5px 0;
+        }
+        .card-back ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .card-back ul li a:hover {
+            text-decoration: underline;
+        }
+        #task-planner {
+            background-color: #A6DCA7;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #task-list li {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #task-list li.completed {
+            text-decoration: line-through;
+            background-color: #d3f9d8;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 1200px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 45%;
+            min-width: 300px;
+        }
+
+        #task-planner, #quiz-generator {
+            background: #F9F9F9;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #task-form input, #study-text {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #40d186;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #35b973;
+        }
+
+        .question-card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .answer-btn {
+            background: #40d186;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .answer-btn:hover {
+            background: #35b973;
+        }
+
+        .answer-text {
+            font-weight: bold;
+            margin-top: 5px;
+            transition: opacity 0.3s ease-in-out;
+            display: none;
+        }
+    </style>
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+</head>
+<body>
+    <header>
+        <h1>Academic Comeback 💪</h1>
+        <p>A guide and list of resources to LOCK IN 🔐 this semester.</p>
+    </header>
+    <section class="resources">
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2>Study Techniques</h2>
+                    <p>Effective methods like Pomodoro Timers, active recall, and spaced repetition.</p>
+                </div>
+                <div class="card-back">
+                    <h2>Useful Links</h2>
+                    <ul>
+                        <li><a href="pomodoro.html">Pomodoro Technique</a></li>
+                        <li><a href="active-recall.html">Active Recall</a></li>
+                        <li><a href="spaced-repetition.html">Spaced Repetition</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2>Motivation</h2>
+                    <p>Flip this card to find a motivating quote!</p>
+                </div>
+                <div class="card-back">
+                    <h2>Quote;</h2>
+                    <ul id="quote-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2>Tools</h2>
+                    <p>Recommended apps and resources to help you stay organized and set goals.</p>
+                </div>
+                <div class="card-back">
+                    <h2>Useful Links</h2>
+                    <ul>
+                        <li><a href="https://TheSman122333.github.io/PaperOS" target="_blank">PaperOS (Lightweight notetaking app, with Pomodoro timers).</a></li>
+                        <li><a href="https://www.calculator.net/gpa-calculator.html" target="_blank">GPA calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <section id="task-planner" class="box">
+            <h2>Task Planner</h2>
+            <form id="task-form">
+                <input type="text" id="task-name" placeholder="Task Name" required />
+                <input type="date" id="due-date" required />
+                <button type="submit">Add Task</button>
+            </form>
+            <ul id="task-list"></ul>
+        </section>
+    
+        <section id="quiz-generator" class="box">
+            <h2>AI-Powered Question Generator</h2>
+            <textarea id="study-text" placeholder="Paste your notes here..."></textarea>
+            <button onclick="generateQuestions()">Generate Questions</button>
+            <div id="quiz-output"></div>
+        </section>
+    </div>
+    
+    
+    
+    <script>
+        const quotes = [
+            "The only way to do great work is to love what you do. – Steve Jobs",
+            "Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill",
+            "It does not matter how slowly you go as long as you do not stop. – Confucius",
+            "Don’t watch the clock; do what it does. Keep going. – Sam Levenson",
+            "You are never too old to set another goal or to dream a new dream. – C.S. Lewis",
+            "The future belongs to those who believe in the beauty of their dreams. – Eleanor Roosevelt",
+            "Believe you can and you're halfway there. – Theodore Roosevelt",
+            "Everything you can imagine is real. – Pablo Picasso",
+            "It always seems impossible until it’s done. – Nelson Mandela",
+            "Success usually comes to those who are too busy to be looking for it. – Henry David Thoreau"
+        ];
+    
+        function getDailyQuote() {
+            const today = new Date();
+            const dayOfYear = today.getDate(); 
+            const index = dayOfYear % quotes.length;
+            return quotes[index];
+        }
+    
+        function getCookie(name) {
+            let cookieArr = document.cookie.split("; ");
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split("=");
+                if (cookiePair[0] === name) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
+
+        function saveTasksToCookies(tasks) {
+            document.cookie = `tasks=${encodeURIComponent(JSON.stringify(tasks))}; path=/; max-age=${60 * 60 * 24 * 300}`;
+        }
+
+        function loadTasksFromCookies() {
+            let savedTasks = getCookie("tasks");
+            return savedTasks ? JSON.parse(savedTasks) : [];
+        }
+
+        function renderTasks() {
+            const taskList = document.getElementById("task-list");
+            taskList.innerHTML = "";
+
+            let tasks = loadTasksFromCookies();
+
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement("li");
+                taskItem.textContent = `${task.name} - Due: ${task.date}`;
+
+                if (task.completed) {
+                    taskItem.classList.add("completed");
+                }
+
+                taskItem.addEventListener("click", () => {
+                    tasks[index].completed = !tasks[index].completed;
+                    saveTasksToCookies(tasks);
+                    renderTasks();
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "❌";
+                deleteButton.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    tasks.splice(index, 1);
+                    saveTasksToCookies(tasks);
+                    renderTasks();
+                });
+
+                taskItem.appendChild(deleteButton);
+                taskList.appendChild(taskItem);
+            });
+        }
+
+
+        document.getElementById("task-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const taskName = document.getElementById("task-name").value;
+            const dueDate = document.getElementById("due-date").value;
+
+            if (!taskName || !dueDate) return;
+
+            let tasks = loadTasksFromCookies();
+            tasks.push({ name: taskName, date: dueDate, completed: false });
+
+            saveTasksToCookies(tasks);
+            renderTasks();
+
+            document.getElementById("task-form").reset();
+        });
+
+        document.addEventListener("DOMContentLoaded", renderTasks);
+        document.addEventListener('DOMContentLoaded', function() {
+            const quoteList = document.getElementById('quote-list');
+            const quote = getDailyQuote();
+            const listItem = document.createElement('li');
+            listItem.textContent = quote;
+            quoteList.appendChild(listItem);
+        });
+
+        async function getAIResponse(studyText) {
+            const systemMessage = {
+                role: "system",
+                content: `
+                    You are an AI that generates quiz questions based on study material. 
+                    Each question should have a corresponding answer.
+                    Format:
+                    Q: [Question]
+                    A: [Answer]
+                `
+            };
+
+            const messages = [
+                systemMessage,
+                { role: "user", content: `Generate quiz questions from this study material:\n\n${studyText}` },
+            ];
+
+            try {
+                const response = await fetch(
+                    "https://api.groq.com/openai/v1/chat/completions",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer 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`,
+                        },
+                        body: JSON.stringify({
+                            messages: messages,
+                            model: "llama-3.3-70b-versatile",
+                            stream: false,
+                        }),
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const jsonResponse = await response.json();
+                return jsonResponse.choices[0].message.content;
+            } catch (error) {
+                console.error('Error fetching AI response:', error);
+                return "Sorry, something went wrong!";
+            }
+        }
+
+        async function generateQuestions() {
+            const studyText = document.getElementById("study-text").value;
+            if (!studyText) {
+                alert("Please paste study material first!");
+                return;
+            }
+
+            const aiResponse = await getAIResponse(studyText);
+            const lines = aiResponse.split("\n");
+
+            let quizOutput = document.getElementById("quiz-output");
+            quizOutput.innerHTML = ""; // Clear previous output
+
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].startsWith("Q: ")) {
+                    let question = lines[i].substring(3);
+                    let answer = (i + 1 < lines.length && lines[i + 1].startsWith("A: ")) ? lines[i + 1].substring(3) : "Answer not provided.";
+
+                    let questionDiv = document.createElement("div");
+                    questionDiv.classList.add("question-card");
+
+                    let questionText = document.createElement("p");
+                    questionText.textContent = question;
+
+                    let answerButton = document.createElement("button");
+                    answerButton.textContent = "Show Answer";
+                    answerButton.classList.add("answer-btn");
+
+                    let answerText = document.createElement("p");
+                    answerText.textContent = answer;
+                    answerText.classList.add("answer-text", "hidden"); // Add 'hidden' class
+
+                    // Toggle answer visibility on click
+                    answerButton.addEventListener("click", function () {
+                        if (answerText.style.display === "none") {
+                            answerText.style.display = "block";
+                            answerButton.textContent = "Hide Answer";
+                        } else {
+                            answerText.style.display = "none";
+                            answerButton.textContent = "Show Answer";
+                        }
+                    });
+
+                    // Ensure the answer is hidden at the start
+                    answerText.style.display = "none";
+
+                    questionDiv.appendChild(questionText);
+                    questionDiv.appendChild(answerButton);
+                    questionDiv.appendChild(answerText);
+                    quizOutput.appendChild(questionDiv);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
