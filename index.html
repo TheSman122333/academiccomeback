@@ -406,6 +406,7 @@
             }
 
             const aiResponse = await getAIResponse(studyText);
+            console.log(aiResponse)
             const lines = aiResponse.split("\n");
 
             let quizOutput = document.getElementById("quiz-output");
